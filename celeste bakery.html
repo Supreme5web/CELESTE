@@ -1,0 +1,2871 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Céleste Bakery — Artisan Blue Cakes & Custom Orders</title>
+    <meta
+      name="description"
+      content="Céleste Bakery crafts exquisite, handmade cakes rooted in French tradition. Explore our blue-themed artisan cake collection and place a custom order today."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <style>
+    /* ==============================
+
+   IMPORTS & CSS VARIABLES
+   ============================== */
+    @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap");
+
+    :root {
+      --blue-950: #0a0e2e;
+      --blue-900: #0d1b4b;
+      --blue-800: #1a2f6e;
+      --blue-700: #1e3a8a;
+      --blue-600: #1d4ed8;
+      --blue-500: #3b82f6;
+      --blue-400: #60a5fa;
+      --blue-300: #93c5fd;
+      --blue-200: #bfdbfe;
+      --blue-100: #dbeafe;
+      --blue-50: #eff6ff;
+
+      --gold: #d4af37;
+      --gold-light: #f0d060;
+      --white: #ffffff;
+      --off-white: #f8f9ff;
+      --glass-bg: rgba(255, 255, 255, 0.06);
+      --glass-border: rgba(255, 255, 255, 0.14);
+      --glass-bg-light: rgba(255, 255, 255, 0.75);
+      --shadow-blue: 0 8px 40px rgba(29, 78, 216, 0.35);
+      --shadow-card: 0 4px 32px rgba(13, 27, 75, 0.25);
+      --radius-lg: 20px;
+      --radius-xl: 30px;
+      --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* ==============================
+   RESET & BASE
+   ============================== */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Inter", sans-serif;
+      background-color: var(--blue-950);
+      color: var(--white);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: "Playfair Display", serif;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+    }
+
+    section {
+      padding: 100px 0;
+    }
+
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .section-tag {
+      display: inline-block;
+      background: linear-gradient(90deg, var(--blue-600), var(--blue-400));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    .section-subtitle {
+      color: var(--blue-300);
+      font-size: 1.05rem;
+      max-width: 540px;
+      margin: 0 auto 60px;
+      font-weight: 300;
+    }
+
+    /* ==============================
+   NAVIGATION
+   ============================== */
+    #navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 20px 0;
+      transition: var(--transition);
+    }
+
+    #navbar.scrolled {
+      background: rgba(10, 14, 46, 0.82);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      padding: 14px 0;
+      border-bottom: 1px solid var(--glass-border);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: "Playfair Display", serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--white), var(--blue-300));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-logo span.logo-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      background: linear-gradient(135deg, var(--blue-600), var(--blue-400));
+      border-radius: 10px;
+      font-size: 1.1rem;
+      -webkit-text-fill-color: white;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--blue-200);
+      transition: color var(--transition);
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--blue-400);
+      transform: scaleX(0);
+      transition: transform var(--transition);
+      border-radius: 2px;
+    }
+
+    .nav-links a:hover {
+      color: var(--white);
+    }
+    .nav-links a:hover::after {
+      transform: scaleX(1);
+    }
+
+    .btn-order-nav {
+      background: linear-gradient(135deg, var(--blue-600), var(--blue-500));
+      color: var(--white) !important;
+      padding: 10px 24px;
+      border-radius: 50px;
+      font-size: 0.88rem !important;
+      font-weight: 600 !important;
+      box-shadow: 0 4px 15px rgba(59, 130, 246, 0.35);
+      transition:
+        transform var(--transition),
+        box-shadow var(--transition) !important;
+    }
+
+    .btn-order-nav::after {
+      display: none !important;
+    }
+
+    .btn-order-nav:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(59, 130, 246, 0.5) !important;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .hamburger span {
+      width: 24px;
+      height: 2px;
+      background: var(--blue-200);
+      border-radius: 2px;
+      transition: var(--transition);
+    }
+
+    /* ==============================
+   HERO SECTION
+   ============================== */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding: 120px 0 80px;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(
+          ellipse 80% 60% at 60% 40%,
+          rgba(29, 78, 216, 0.4) 0%,
+          transparent 70%
+        ),
+        radial-gradient(
+          ellipse 40% 40% at 20% 70%,
+          rgba(96, 165, 250, 0.2) 0%,
+          transparent 60%
+        ),
+        linear-gradient(
+          160deg,
+          var(--blue-950) 0%,
+          var(--blue-900) 50%,
+          #0f1f55 100%
+        );
+    }
+
+    .hero-particles {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      background: var(--blue-400);
+      opacity: 0.12;
+      animation: float-particle 12s infinite ease-in-out;
+    }
+
+    .particle:nth-child(1) {
+      width: 12px;
+      height: 12px;
+      top: 15%;
+      left: 10%;
+      animation-delay: 0s;
+      animation-duration: 10s;
+    }
+    .particle:nth-child(2) {
+      width: 6px;
+      height: 6px;
+      top: 30%;
+      left: 25%;
+      animation-delay: 2s;
+      animation-duration: 14s;
+      opacity: 0.08;
+    }
+    .particle:nth-child(3) {
+      width: 20px;
+      height: 20px;
+      top: 60%;
+      left: 5%;
+      animation-delay: 4s;
+      animation-duration: 11s;
+    }
+    .particle:nth-child(4) {
+      width: 8px;
+      height: 8px;
+      top: 75%;
+      left: 40%;
+      animation-delay: 1s;
+      animation-duration: 9s;
+      opacity: 0.07;
+    }
+    .particle:nth-child(5) {
+      width: 14px;
+      height: 14px;
+      top: 10%;
+      left: 75%;
+      animation-delay: 3s;
+      animation-duration: 13s;
+    }
+    .particle:nth-child(6) {
+      width: 5px;
+      height: 5px;
+      top: 50%;
+      left: 88%;
+      animation-delay: 5s;
+      animation-duration: 8s;
+      opacity: 0.15;
+    }
+    .particle:nth-child(7) {
+      width: 10px;
+      height: 10px;
+      top: 85%;
+      left: 70%;
+      animation-delay: 2s;
+      animation-duration: 12s;
+    }
+    .particle:nth-child(8) {
+      width: 16px;
+      height: 16px;
+      top: 40%;
+      left: 55%;
+      animation-delay: 6s;
+      animation-duration: 15s;
+      opacity: 0.06;
+    }
+
+    @keyframes float-particle {
+      0%,
+      100% {
+        transform: translateY(0) scale(1);
+      }
+      50% {
+        transform: translateY(-30px) scale(1.1);
+      }
+    }
+
+    .aurora {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(
+        circle,
+        rgba(59, 130, 246, 0.15) 0%,
+        transparent 70%
+      );
+      top: -100px;
+      right: -100px;
+      animation: aurora-pulse 8s ease-in-out infinite;
+    }
+
+    @keyframes aurora-pulse {
+      0%,
+      100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 0.6;
+      }
+      50% {
+        transform: scale(1.2) rotate(20deg);
+        opacity: 1;
+      }
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 60px;
+    }
+
+    .hero-content {
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(10px);
+      border-radius: 50px;
+      padding: 8px 18px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--blue-300);
+      margin-bottom: 28px;
+      animation: slide-up 0.8s ease forwards;
+    }
+
+    .hero-badge .badge-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--blue-400);
+      border-radius: 50%;
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 0.5;
+        transform: scale(0.7);
+      }
+    }
+
+    .hero-title {
+      font-size: clamp(2.8rem, 5.5vw, 4.5rem);
+      line-height: 1.1;
+      margin-bottom: 24px;
+      animation: slide-up 0.8s ease 0.15s both;
+    }
+
+    .hero-title .accent {
+      background: linear-gradient(
+        135deg,
+        var(--blue-400),
+        var(--blue-300),
+        var(--gold-light)
+      );
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-description {
+      font-size: 1.1rem;
+      color: var(--blue-200);
+      margin-bottom: 40px;
+      font-weight: 300;
+      max-width: 440px;
+      animation: slide-up 0.8s ease 0.3s both;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      animation: slide-up 0.8s ease 0.45s both;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, var(--blue-600), var(--blue-500));
+      color: var(--white);
+      padding: 16px 32px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1rem;
+      box-shadow: var(--shadow-blue);
+      transition:
+        transform var(--transition),
+        box-shadow var(--transition);
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 40px rgba(59, 130, 246, 0.5);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--glass-bg);
+      color: var(--blue-200);
+      padding: 16px 32px;
+      border-radius: 50px;
+      font-weight: 500;
+      font-size: 1rem;
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(10px);
+      transition:
+        background var(--transition),
+        color var(--transition),
+        transform var(--transition);
+      cursor: pointer;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.12);
+      color: var(--white);
+      transform: translateY(-3px);
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 40px;
+      margin-top: 52px;
+      animation: slide-up 0.8s ease 0.6s both;
+    }
+
+    .stat-item {
+    }
+
+    .stat-number {
+      font-family: "Playfair Display", serif;
+      font-size: 2rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--white), var(--blue-300));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .stat-label {
+      font-size: 0.78rem;
+      color: var(--blue-400);
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      margin-top: 2px;
+    }
+
+    .hero-visual {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: slide-up 0.8s ease 0.2s both;
+    }
+
+    .hero-img-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 480px;
+    }
+
+    .hero-cake-img {
+      border-radius: var(--radius-xl);
+      box-shadow:
+        0 30px 80px rgba(13, 27, 75, 0.7),
+        0 0 0 1px var(--glass-border);
+      object-fit: cover;
+      height: 520px;
+      width: 100%;
+    }
+
+    .hero-img-glow {
+      position: absolute;
+      inset: -20px;
+      border-radius: 50px;
+      background: radial-gradient(
+        ellipse,
+        rgba(29, 78, 216, 0.4) 0%,
+        transparent 70%
+      );
+      z-index: -1;
+      animation: glow-pulse 4s ease-in-out infinite;
+    }
+
+    @keyframes glow-pulse {
+      0%,
+      100% {
+        opacity: 0.6;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.05);
+      }
+    }
+
+    .hero-floating-card {
+      position: absolute;
+      background: var(--glass-bg-light);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .hero-floating-card.card-1 {
+      bottom: 40px;
+      left: -30px;
+      animation: float-card 5s ease-in-out infinite;
+    }
+
+    .hero-floating-card.card-2 {
+      top: 40px;
+      right: -20px;
+      animation: float-card 6s ease-in-out infinite reverse;
+    }
+
+    @keyframes float-card {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .fc-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--blue-600), var(--blue-400));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
+
+    .fc-text {
+    }
+
+    .fc-title {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--blue-900);
+    }
+
+    .fc-sub {
+      font-size: 0.72rem;
+      color: var(--blue-700);
+      margin-top: 1px;
+    }
+
+    @keyframes slide-up {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ==============================
+   MARQUEE STRIP
+   ============================== */
+    .marquee-strip {
+      background: linear-gradient(
+        90deg,
+        var(--blue-800),
+        var(--blue-700),
+        var(--blue-800)
+      );
+      border-top: 1px solid var(--glass-border);
+      border-bottom: 1px solid var(--glass-border);
+      overflow: hidden;
+      padding: 18px 0;
+    }
+
+    .marquee-track {
+      display: flex;
+      gap: 60px;
+      animation: marquee 25s linear infinite;
+      white-space: nowrap;
+    }
+
+    .marquee-track span {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--blue-200);
+      letter-spacing: 0.05em;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .marquee-track span::after {
+      content: "★";
+      color: var(--gold);
+      font-size: 0.7rem;
+    }
+
+    @keyframes marquee {
+      from {
+        transform: translateX(0);
+      }
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    /* ==============================
+   CAKES SHOWCASE
+   ============================== */
+    #cakes {
+      background: linear-gradient(
+        180deg,
+        var(--blue-950) 0%,
+        var(--blue-900) 100%
+      );
+      text-align: center;
+    }
+
+    .cakes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 28px;
+      margin-top: 0;
+    }
+
+    .cake-card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition:
+        transform var(--transition),
+        box-shadow var(--transition),
+        border-color var(--transition);
+      cursor: pointer;
+      position: relative;
+    }
+
+    .cake-card:hover {
+      transform: translateY(-8px);
+      box-shadow:
+        var(--shadow-card),
+        0 0 0 1px rgba(96, 165, 250, 0.3);
+      border-color: rgba(96, 165, 250, 0.3);
+    }
+
+    .cake-img-wrap {
+      position: relative;
+      height: 230px;
+      overflow: hidden;
+    }
+
+    .cake-img-wrap img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .cake-card:hover .cake-img-wrap img {
+      transform: scale(1.08);
+    }
+
+    .cake-badge {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: linear-gradient(135deg, var(--blue-600), var(--blue-500));
+      color: var(--white);
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 50px;
+      letter-spacing: 0.05em;
+      box-shadow: 0 4px 12px rgba(29, 78, 216, 0.4);
+    }
+
+    .cake-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(10, 14, 46, 0.7) 0%,
+        transparent 60%
+      );
+    }
+
+    .cake-info {
+      padding: 22px 22px 26px;
+      text-align: left;
+    }
+
+    .cake-name {
+      font-family: "Playfair Display", serif;
+      font-size: 1.25rem;
+      margin-bottom: 8px;
+      color: var(--white);
+    }
+
+    .cake-tagline {
+      font-size: 0.85rem;
+      color: var(--blue-300);
+      margin-bottom: 16px;
+      font-weight: 300;
+    }
+
+    .cake-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .cake-price {
+      font-size: 1.3rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .btn-recipe {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(59, 130, 246, 0.15);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      color: var(--blue-300);
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 50px;
+      transition:
+        background var(--transition),
+        color var(--transition),
+        border-color var(--transition);
+    }
+
+    .btn-recipe:hover {
+      background: rgba(59, 130, 246, 0.3);
+      color: var(--white);
+      border-color: var(--blue-400);
+    }
+
+    /* ==============================
+   RECIPE MODAL
+   ============================== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 14, 46, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      opacity: 0;
+      visibility: hidden;
+      transition:
+        opacity 0.35s ease,
+        visibility 0.35s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal {
+      background: linear-gradient(145deg, #111d4e, #0d1b4b);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-xl);
+      max-width: 780px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+      transform: scale(0.9) translateY(20px);
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+    }
+
+    .modal-overlay.active .modal {
+      transform: scale(1) translateY(0);
+    }
+
+    .modal-close {
+      position: sticky;
+      top: 0;
+      display: flex;
+      justify-content: flex-end;
+      padding: 20px 20px 0;
+      z-index: 10;
+    }
+
+    .modal-close-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid var(--glass-border);
+      color: var(--blue-200);
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition:
+        background var(--transition),
+        color var(--transition);
+    }
+
+    .modal-close-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+      color: var(--white);
+    }
+
+    .modal-body {
+      padding: 0 36px 36px;
+    }
+
+    .modal-img {
+      border-radius: var(--radius-lg);
+      height: 260px;
+      object-fit: cover;
+      margin-bottom: 28px;
+      width: 100%;
+    }
+
+    .modal-cake-name {
+      font-size: 2rem;
+      margin-bottom: 8px;
+    }
+
+    .modal-tagline {
+      color: var(--blue-300);
+      font-size: 1rem;
+      font-weight: 300;
+      margin-bottom: 30px;
+    }
+
+    .recipe-section-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--blue-400);
+      margin-bottom: 14px;
+    }
+
+    .recipe-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      margin-bottom: 30px;
+    }
+
+    .ingredients-col,
+    .steps-col {
+    }
+
+    .ingredients-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .ingredients-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.9rem;
+      color: var(--blue-100);
+    }
+
+    .ingredients-list li::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      background: var(--blue-400);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .steps-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      counter-reset: steps;
+    }
+
+    .steps-list li {
+      display: flex;
+      gap: 14px;
+      font-size: 0.9rem;
+      color: var(--blue-100);
+      counter-increment: steps;
+    }
+
+    .step-num {
+      flex-shrink: 0;
+      width: 26px;
+      height: 26px;
+      background: linear-gradient(135deg, var(--blue-600), var(--blue-500));
+      border-radius: 50%;
+      font-size: 0.75rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      margin-top: 1px;
+    }
+
+    .modal-order-btn {
+      width: 100%;
+      margin-top: 10px;
+      padding: 16px;
+      border-radius: 50px;
+      background: linear-gradient(135deg, var(--blue-600), var(--blue-500));
+      color: white;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      border: none;
+      box-shadow: var(--shadow-blue);
+      transition:
+        transform var(--transition),
+        box-shadow var(--transition);
+      font-family: "Inter", sans-serif;
+    }
+
+    .modal-order-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(59, 130, 246, 0.5);
+    }
+
+    /* ==============================
+   PROCESS SECTION
+   ============================== */
+    #process {
+      text-align: center;
+      background: linear-gradient(180deg, var(--blue-900) 0%, #0f1838 100%);
+    }
+
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 28px;
+      margin-top: 0;
+      position: relative;
+    }
+
+    .process-card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-lg);
+      padding: 36px 28px;
+      transition:
+        transform var(--transition),
+        border-color var(--transition);
+    }
+
+    .process-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(96, 165, 250, 0.35);
+    }
+
+    .process-num {
+      font-family: "Playfair Display", serif;
+      font-size: 3rem;
+      font-weight: 700;
+      background: linear-gradient(
+        135deg,
+        rgba(59, 130, 246, 0.3),
+        rgba(59, 130, 246, 0.1)
+      );
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+
+    .process-icon {
+      font-size: 2rem;
+      margin-bottom: 14px;
+    }
+
+    .process-title {
+      font-family: "Playfair Display", serif;
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      color: var(--white);
+    }
+
+    .process-desc {
+      font-size: 0.88rem;
+      color: var(--blue-300);
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    /* ==============================
+   ORDER SECTION
+   ============================== */
+    #order {
+      background: linear-gradient(180deg, #0f1838 0%, var(--blue-950) 100%);
+    }
+
+    .order-inner {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .order-info {
+    }
+
+    .order-info .section-subtitle {
+      text-align: left;
+      margin: 0 0 40px;
+    }
+
+    .order-info .section-title {
+      text-align: left;
+      margin-bottom: 16px;
+    }
+
+    .order-promises {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      margin-top: 40px;
+    }
+
+    .promise-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .promise-icon {
+      width: 44px;
+      height: 44px;
+      min-width: 44px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--blue-700), var(--blue-600));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
+
+    .promise-text h4 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 2px;
+      color: var(--white);
+    }
+
+    .promise-text p {
+      font-size: 0.83rem;
+      color: var(--blue-300);
+      font-weight: 300;
+    }
+
+    /* Order Form */
+    .order-form-wrap {
+      background: linear-gradient(
+        145deg,
+        rgba(26, 47, 110, 0.5),
+        rgba(13, 27, 75, 0.5)
+      );
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-xl);
+      padding: 40px 36px;
+      backdrop-filter: blur(10px);
+    }
+
+    .form-title {
+      font-size: 1.5rem;
+      margin-bottom: 28px;
+      color: var(--white);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-group.full {
+      grid-column: 1 / -1;
+    }
+
+    .form-group label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--blue-300);
+      letter-spacing: 0.04em;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      padding: 14px 16px;
+      color: var(--white);
+      font-size: 0.92rem;
+      font-family: "Inter", sans-serif;
+      transition:
+        border-color var(--transition),
+        background var(--transition),
+        box-shadow var(--transition);
+      outline: none;
+      width: 100%;
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: rgba(147, 197, 253, 0.4);
+    }
+
+    .form-group select option {
+      background: var(--blue-900);
+      color: var(--white);
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--blue-400);
+      background: rgba(59, 130, 246, 0.08);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+    }
+
+    .form-group input.error,
+    .form-group select.error,
+    .form-group textarea.error {
+      border-color: #f87171;
+      box-shadow: 0 0 0 3px rgba(248, 113, 113, 0.15);
+    }
+
+    .error-msg {
+      font-size: 0.75rem;
+      color: #f87171;
+      margin-top: 2px;
+      display: none;
+    }
+
+    .error-msg.visible {
+      display: block;
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .btn-submit {
+      width: 100%;
+      margin-top: 24px;
+      padding: 17px;
+      border-radius: 50px;
+      background: linear-gradient(135deg, var(--blue-600), var(--blue-500));
+      color: white;
+      font-weight: 700;
+      font-size: 1.05rem;
+      cursor: pointer;
+      border: none;
+      box-shadow: var(--shadow-blue);
+      transition:
+        transform var(--transition),
+        box-shadow var(--transition);
+      font-family: "Inter", sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .btn-submit:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 40px rgba(59, 130, 246, 0.5);
+    }
+
+    .btn-submit:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .form-success {
+      text-align: center;
+      padding: 40px 20px;
+      display: none;
+    }
+
+    .form-success.visible {
+      display: block;
+    }
+
+    .success-icon {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue-600), var(--blue-400));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      margin: 0 auto 20px;
+    }
+
+    .success-title {
+      font-size: 1.6rem;
+      margin-bottom: 10px;
+    }
+
+    .success-sub {
+      color: var(--blue-300);
+      font-size: 0.95rem;
+      font-weight: 300;
+    }
+
+    /* ==============================
+   TESTIMONIALS
+   ============================== */
+    #testimonials {
+      text-align: center;
+      background: linear-gradient(
+        180deg,
+        var(--blue-950) 0%,
+        var(--blue-900) 100%
+      );
+      overflow: hidden;
+    }
+
+    .testimonials-track-wrap {
+      overflow: hidden;
+      margin-top: 0;
+      -webkit-mask-image: linear-gradient(
+        90deg,
+        transparent,
+        black 15%,
+        black 85%,
+        transparent
+      );
+      mask-image: linear-gradient(
+        90deg,
+        transparent,
+        black 15%,
+        black 85%,
+        transparent
+      );
+    }
+
+    .testimonials-track {
+      display: flex;
+      gap: 24px;
+      animation: testimonial-scroll 30s linear infinite;
+    }
+
+    .testimonials-track:hover {
+      animation-play-state: paused;
+    }
+
+    @keyframes testimonial-scroll {
+      from {
+        transform: translateX(0);
+      }
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    .testimonial-card {
+      flex-shrink: 0;
+      width: 320px;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-lg);
+      padding: 28px 24px;
+      text-align: left;
+    }
+
+    .stars {
+      color: var(--gold);
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+      margin-bottom: 14px;
+    }
+
+    .testimonial-text {
+      font-size: 0.92rem;
+      color: var(--blue-100);
+      line-height: 1.75;
+      font-style: italic;
+      margin-bottom: 20px;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .author-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue-600), var(--blue-400));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .author-name {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--white);
+    }
+
+    .author-location {
+      font-size: 0.75rem;
+      color: var(--blue-400);
+      margin-top: 1px;
+    }
+
+    /* ==============================
+   FOOTER
+   ============================== */
+    footer {
+      background: var(--blue-950);
+      border-top: 1px solid var(--glass-border);
+      padding: 60px 0 30px;
+    }
+
+    .footer-inner {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 50px;
+      margin-bottom: 50px;
+    }
+
+    .footer-brand .nav-logo {
+      margin-bottom: 16px;
+      display: inline-flex;
+    }
+
+    .footer-tagline {
+      font-size: 0.88rem;
+      color: var(--blue-300);
+      font-weight: 300;
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 12px;
+    }
+
+    .social-link {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      color: var(--blue-300);
+      transition:
+        background var(--transition),
+        color var(--transition);
+    }
+
+    .social-link:hover {
+      background: var(--blue-700);
+      color: var(--white);
+    }
+
+    .footer-col h4 {
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--blue-400);
+      margin-bottom: 20px;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-links a {
+      font-size: 0.88rem;
+      color: var(--blue-300);
+      font-weight: 300;
+      transition: color var(--transition);
+    }
+
+    .footer-links a:hover {
+      color: var(--white);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid var(--glass-border);
+      padding-top: 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.82rem;
+      color: var(--blue-400);
+    }
+
+    /* ==============================
+   SCROLL REVEAL
+   ============================== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition:
+        opacity 0.7s ease,
+        transform 0.7s ease;
+    }
+
+    .reveal.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ==============================
+   SCROLLBAR
+   ============================== */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--blue-950);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--blue-700);
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--blue-500);
+    }
+
+    /* ==============================
+   RESPONSIVE
+   ============================== */
+    @media (max-width: 900px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 50px;
+        text-align: center;
+      }
+      .hero-description {
+        margin: 0 auto 40px;
+      }
+      .hero-actions {
+        justify-content: center;
+      }
+      .hero-stats {
+        justify-content: center;
+      }
+      .hero-visual {
+        order: -1;
+      }
+      .hero-cake-img {
+        height: 360px;
+      }
+      .hero-floating-card.card-1 {
+        left: 0;
+      }
+      .hero-floating-card.card-2 {
+        right: 0;
+      }
+      .order-inner {
+        grid-template-columns: 1fr;
+      }
+      .footer-inner {
+        grid-template-columns: 1fr 1fr;
+      }
+      .recipe-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      section {
+        padding: 70px 0;
+      }
+      .nav-links {
+        display: none;
+      }
+      .hamburger {
+        display: flex;
+      }
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+      .footer-inner {
+        grid-template-columns: 1fr;
+      }
+      .hero-stats {
+        flex-wrap: wrap;
+        gap: 24px;
+      }
+      .order-form-wrap {
+        padding: 28px 20px;
+      }
+    }
+  </style>
+  <body>
+    <!-- ==================== NAVBAR ==================== -->
+    <nav id="navbar" role="navigation" aria-label="Main navigation">
+      <div class="container nav-inner">
+        <a href="#hero" class="nav-logo">
+          <span class="logo-icon">🎂</span>
+          Céleste
+        </a>
+        <ul class="nav-links" id="nav-links">
+          <li><a href="#cakes">Our Cakes</a></li>
+          <li><a href="#process">Our Process</a></li>
+          <li><a href="#testimonials">Reviews</a></li>
+          <li>
+            <a href="#order" class="btn-order-nav" id="nav-order-btn"
+              >Order Now</a
+            >
+          </li>
+        </ul>
+        <div
+          class="hamburger"
+          id="hamburger"
+          aria-label="Toggle menu"
+          role="button"
+          tabindex="0"
+        >
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ==================== HERO ==================== -->
+    <section id="hero" aria-label="Hero">
+      <div class="hero-bg"></div>
+      <div class="hero-particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+      </div>
+      <div class="aurora"></div>
+      <div class="container hero-inner">
+        <div class="hero-content">
+          <div class="hero-badge">
+            <span class="badge-dot"></span>
+            Handcrafted · French Tradition · Premium Ingredients
+          </div>
+          <h1 class="hero-title">
+            Where Every Cake<br />Is a
+            <span class="accent">Masterpiece</span>
+          </h1>
+          <p class="hero-description">
+            Céleste Bakery creates stunning, bespoke cakes for every occasion —
+            crafted with love, premium French techniques, and the finest
+            ingredients.
+          </p>
+          <div class="hero-actions">
+            <a href="#cakes" class="btn-primary" id="hero-cakes-btn">
+              ✨ Explore Cakes
+            </a>
+            <a href="#order" class="btn-secondary" id="hero-order-btn">
+              🎂 Place an Order
+            </a>
+          </div>
+          <div class="hero-stats">
+            <div class="stat-item">
+              <div class="stat-number">500+</div>
+              <div class="stat-label">Cakes Created</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">98%</div>
+              <div class="stat-label">Happy Customers</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">12+</div>
+              <div class="stat-label">Award Wins</div>
+            </div>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="hero-img-wrap">
+            <div class="hero-img-glow"></div>
+            <img
+              src="images/blue_velvet_cake.png"
+              alt="Signature Ocean Blue Velvet Cake by Céleste Bakery"
+              class="hero-cake-img"
+              loading="eager"
+            />
+            <div class="hero-floating-card card-1">
+              <div class="fc-icon">🌟</div>
+              <div class="fc-text">
+                <div class="fc-title">Award Winner</div>
+                <div class="fc-sub">Best Artisan Bakery 2025</div>
+              </div>
+            </div>
+            <div class="hero-floating-card card-2">
+              <div class="fc-icon">🚚</div>
+              <div class="fc-text">
+                <div class="fc-title">Free Delivery</div>
+                <div class="fc-sub">On orders over £80</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== MARQUEE ==================== -->
+    <div class="marquee-strip" aria-hidden="true">
+      <div class="marquee-track" id="marquee-track">
+        <span>Blueberry Cream Cakes</span>
+        <span>Ocean Blue Velvet</span>
+        <span>Butterfly Pea Delights</span>
+        <span>Sapphire Drip Cakes</span>
+        <span>Custom Wedding Cakes</span>
+        <span>Celebration Specials</span>
+        <span>French Pastry Tradition</span>
+        <span>Same-Week Delivery</span>
+        <!-- Duplicate for seamless loop -->
+        <span>Blueberry Cream Cakes</span>
+        <span>Ocean Blue Velvet</span>
+        <span>Butterfly Pea Delights</span>
+        <span>Sapphire Drip Cakes</span>
+        <span>Custom Wedding Cakes</span>
+        <span>Celebration Specials</span>
+        <span>French Pastry Tradition</span>
+        <span>Same-Week Delivery</span>
+      </div>
+    </div>
+
+    <!-- ==================== CAKES SHOWCASE ==================== -->
+    <section id="cakes" aria-label="Cake Showcase">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-tag">Our Collection</div>
+          <h2 class="section-title">Cakes That Captivate</h2>
+          <p class="section-subtitle">
+            Each cake is a work of art. Click on any cake to reveal the full
+            recipe — and bring a little Céleste magic into your own kitchen.
+          </p>
+        </div>
+        <div class="cakes-grid reveal">
+          <!-- CAKE 1 -->
+          <article
+            class="cake-card"
+            id="cake-card-1"
+            role="button"
+            tabindex="0"
+            aria-label="Blueberry Cream Dream - view recipe"
+            data-cake="0"
+          >
+            <div class="cake-img-wrap">
+              <img
+                src="images/blueberry_cream_cake.png"
+                alt="Blueberry Cream Dream Cake"
+                loading="lazy"
+              />
+              <div class="cake-overlay"></div>
+              <div class="cake-badge">Bestseller</div>
+            </div>
+            <div class="cake-info">
+              <h3 class="cake-name">Blueberry Cream Dream</h3>
+              <p class="cake-tagline">
+                Blue mirror glaze · Fresh blueberries · Vanilla cream
+              </p>
+              <div class="cake-meta">
+                <span class="cake-price">from £55</span>
+                <button
+                  class="btn-recipe"
+                  id="recipe-btn-0"
+                  aria-label="View recipe for Blueberry Cream Dream"
+                >
+                  📖 Recipe
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- CAKE 2 -->
+          <article
+            class="cake-card"
+            id="cake-card-2"
+            role="button"
+            tabindex="0"
+            aria-label="Ocean Blue Velvet - view recipe"
+            data-cake="1"
+          >
+            <div class="cake-img-wrap">
+              <img
+                src="images/blue_velvet_cake.png"
+                alt="Ocean Blue Velvet Cake"
+                loading="lazy"
+              />
+              <div class="cake-overlay"></div>
+              <div class="cake-badge">Signature</div>
+            </div>
+            <div class="cake-info">
+              <h3 class="cake-name">Ocean Blue Velvet</h3>
+              <p class="cake-tagline">
+                Navy fondant · Silver pearl · Gold leaf accents
+              </p>
+              <div class="cake-meta">
+                <span class="cake-price">from £70</span>
+                <button
+                  class="btn-recipe"
+                  id="recipe-btn-1"
+                  aria-label="View recipe for Ocean Blue Velvet"
+                >
+                  📖 Recipe
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- CAKE 3 -->
+          <article
+            class="cake-card"
+            id="cake-card-3"
+            role="button"
+            tabindex="0"
+            aria-label="Butterfly Pea Blossom - view recipe"
+            data-cake="2"
+          >
+            <div class="cake-img-wrap">
+              <img
+                src="images/butterfly_pea_cake.png"
+                alt="Butterfly Pea Blossom Cake"
+                loading="lazy"
+              />
+              <div class="cake-overlay"></div>
+              <div class="cake-badge">Seasonal</div>
+            </div>
+            <div class="cake-info">
+              <h3 class="cake-name">Butterfly Pea Blossom</h3>
+              <p class="cake-tagline">
+                Pale blue swirls · Lavender flowers · Sugar pearls
+              </p>
+              <div class="cake-meta">
+                <span class="cake-price">from £60</span>
+                <button
+                  class="btn-recipe"
+                  id="recipe-btn-2"
+                  aria-label="View recipe for Butterfly Pea Blossom"
+                >
+                  📖 Recipe
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- CAKE 4 -->
+          <article
+            class="cake-card"
+            id="cake-card-4"
+            role="button"
+            tabindex="0"
+            aria-label="Sapphire Drip Cake - view recipe"
+            data-cake="3"
+          >
+            <div class="cake-img-wrap">
+              <img
+                src="images/sapphire_drip_cake.png"
+                alt="Sapphire Drip Cake"
+                loading="lazy"
+              />
+              <div class="cake-overlay"></div>
+              <div class="cake-badge">Chef's Pick</div>
+            </div>
+            <div class="cake-info">
+              <h3 class="cake-name">Sapphire Drip Cake</h3>
+              <p class="cake-tagline">
+                Royal blue ganache · White chocolate shards · Glitter
+              </p>
+              <div class="cake-meta">
+                <span class="cake-price">from £75</span>
+                <button
+                  class="btn-recipe"
+                  id="recipe-btn-3"
+                  aria-label="View recipe for Sapphire Drip Cake"
+                >
+                  📖 Recipe
+                </button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== RECIPE MODAL ==================== -->
+    <div
+      class="modal-overlay"
+      id="recipe-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-cake-name"
+    >
+      <div class="modal" id="modal-panel">
+        <div class="modal-close">
+          <button
+            class="modal-close-btn"
+            id="modal-close-btn"
+            aria-label="Close recipe modal"
+          >
+            ✕
+          </button>
+        </div>
+        <div class="modal-body">
+          <img id="modal-img" src="" alt="" class="modal-img" />
+          <h2 class="modal-cake-name" id="modal-cake-name"></h2>
+          <p class="modal-tagline" id="modal-tagline"></p>
+
+          <div class="recipe-grid">
+            <div class="ingredients-col">
+              <div class="recipe-section-label">Ingredients</div>
+              <ul class="ingredients-list" id="modal-ingredients"></ul>
+            </div>
+            <div class="steps-col">
+              <div class="recipe-section-label">Method</div>
+              <ol class="steps-list" id="modal-steps"></ol>
+            </div>
+          </div>
+
+          <button class="modal-order-btn" id="modal-order-btn">
+            🎂 Order This Cake
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== PROCESS ==================== -->
+    <section id="process" aria-label="Our Process">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-tag">The Céleste Way</div>
+          <h2 class="section-title">From Dream to Doorstep</h2>
+          <p class="section-subtitle">
+            Every order follows our signature four-step process to guarantee an
+            extraordinary experience.
+          </p>
+        </div>
+        <div class="process-steps reveal">
+          <div class="process-card">
+            <div class="process-num">01</div>
+            <div class="process-icon">💬</div>
+            <h3 class="process-title">Consult</h3>
+            <p class="process-desc">
+              Tell us your vision — occasion, flavour preferences, dietary
+              needs, and aesthetic goals.
+            </p>
+          </div>
+          <div class="process-card">
+            <div class="process-num">02</div>
+            <div class="process-icon">🎨</div>
+            <h3 class="process-title">Design</h3>
+            <p class="process-desc">
+              Our pastry artists craft a bespoke design sketch and flavour
+              profile for your approval.
+            </p>
+          </div>
+          <div class="process-card">
+            <div class="process-num">03</div>
+            <div class="process-icon">👩‍🍳</div>
+            <h3 class="process-title">Bake</h3>
+            <p class="process-desc">
+              Using only the finest French-sourced ingredients, we meticulously
+              bake and decorate your cake.
+            </p>
+          </div>
+          <div class="process-card">
+            <div class="process-num">04</div>
+            <div class="process-icon">🚚</div>
+            <h3 class="process-title">Deliver</h3>
+            <p class="process-desc">
+              Your cake arrives in temperature-controlled luxury packaging,
+              ready to impress.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== ORDER ==================== -->
+    <section id="order" aria-label="Place Your Order">
+      <div class="container order-inner">
+        <div class="order-info reveal">
+          <div class="section-tag">Custom Orders</div>
+          <h2 class="section-title">Order Your<br />Dream Cake</h2>
+          <p class="section-subtitle">
+            Every cake is made fresh to order. Fill in the form and we'll be in
+            touch within 24 hours to confirm your creation.
+          </p>
+          <div class="order-promises">
+            <div class="promise-item">
+              <div class="promise-icon">🌿</div>
+              <div class="promise-text">
+                <h4>Premium, Natural Ingredients</h4>
+                <p>No artificial colours or preservatives — ever.</p>
+              </div>
+            </div>
+            <div class="promise-item">
+              <div class="promise-icon">🎂</div>
+              <div class="promise-text">
+                <h4>Fully Customisable</h4>
+                <p>
+                  Size, flavour, design, dietary requirements — all tailored to
+                  you.
+                </p>
+              </div>
+            </div>
+            <div class="promise-item">
+              <div class="promise-icon">📅</div>
+              <div class="promise-text">
+                <h4>On-Time Guarantee</h4>
+                <p>We've never missed a delivery date in 8 years of baking.</p>
+              </div>
+            </div>
+            <div class="promise-item">
+              <div class="promise-icon">💙</div>
+              <div class="promise-text">
+                <h4>Made with Love</h4>
+                <p>
+                  Every order receives our full care and artistic attention.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="order-form-wrap reveal">
+          <h3 class="form-title">✨ Start Your Order</h3>
+
+          <form id="order-form" novalidate>
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="field-name">Your Name *</label>
+                <input
+                  type="text"
+                  id="field-name"
+                  name="name"
+                  placeholder="e.g. Sophie Martin"
+                  autocomplete="name"
+                />
+                <span class="error-msg" id="err-name"
+                  >Please enter your name.</span
+                >
+              </div>
+              <div class="form-group">
+                <label for="field-email">Email Address *</label>
+                <input
+                  type="email"
+                  id="field-email"
+                  name="email"
+                  placeholder="you@example.com"
+                  autocomplete="email"
+                />
+                <span class="error-msg" id="err-email"
+                  >Please enter a valid email.</span
+                >
+              </div>
+              <div class="form-group">
+                <label for="field-phone">Phone Number</label>
+                <input
+                  type="tel"
+                  id="field-phone"
+                  name="phone"
+                  placeholder="+44 7700 900000"
+                  autocomplete="tel"
+                />
+              </div>
+              <div class="form-group">
+                <label for="field-date">Delivery Date *</label>
+                <input type="date" id="field-date" name="delivery_date" />
+                <span class="error-msg" id="err-date"
+                  >Please choose a delivery date at least 3 days ahead.</span
+                >
+              </div>
+              <div class="form-group">
+                <label for="field-cake">Cake Type *</label>
+                <select id="field-cake" name="cake_type">
+                  <option value="">— Select a cake —</option>
+                  <option value="blueberry_cream">Blueberry Cream Dream</option>
+                  <option value="blue_velvet">Ocean Blue Velvet</option>
+                  <option value="butterfly_pea">Butterfly Pea Blossom</option>
+                  <option value="sapphire_drip">Sapphire Drip Cake</option>
+                  <option value="custom">Custom Design</option>
+                </select>
+                <span class="error-msg" id="err-cake"
+                  >Please select a cake type.</span
+                >
+              </div>
+              <div class="form-group">
+                <label for="field-size">Cake Size *</label>
+                <select id="field-size" name="cake_size">
+                  <option value="">— Select a size —</option>
+                  <option value="6inch">6″ — Serves 8–10</option>
+                  <option value="8inch">8″ — Serves 14–16</option>
+                  <option value="10inch">10″ — Serves 22–25</option>
+                  <option value="tiered">Tiered — Custom</option>
+                </select>
+                <span class="error-msg" id="err-size"
+                  >Please select a size.</span
+                >
+              </div>
+              <div class="form-group full">
+                <label for="field-message"
+                  >Special Requests / Design Notes</label
+                >
+                <textarea
+                  id="field-message"
+                  name="message"
+                  placeholder="Tell us about your occasion, dietary needs, colour preferences, inscription text…"
+                ></textarea>
+              </div>
+            </div>
+
+            <button type="submit" class="btn-submit" id="submit-btn">
+              <span>Send My Order Request</span>
+              <span>🎂</span>
+            </button>
+          </form>
+
+          <div class="form-success" id="form-success">
+            <div class="success-icon">✓</div>
+            <h3 class="success-title">Order Received!</h3>
+            <p class="success-sub">
+              Thank you! We'll review your order and be in touch within 24 hours
+              to confirm all the delicious details.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TESTIMONIALS ==================== -->
+    <section id="testimonials" aria-label="Customer Reviews">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-tag">Happy Customers</div>
+          <h2 class="section-title">Loved by Every Table</h2>
+          <p class="section-subtitle">
+            Don't just take our word for it — here's what our customers say.
+          </p>
+        </div>
+      </div>
+      <div class="testimonials-track-wrap reveal">
+        <div class="testimonials-track" id="testimonials-track">
+          <!-- Original set -->
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p class="testimonial-text">
+              "The Ocean Blue Velvet cake was absolutely breathtaking. Our
+              wedding guests haven't stopped talking about it. Truly a work of
+              art!"
+            </p>
+            <div class="testimonial-author">
+              <div class="author-avatar">EL</div>
+              <div>
+                <div class="author-name">Emma & Luca</div>
+                <div class="author-location">London, UK</div>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p class="testimonial-text">
+              "I ordered the Sapphire Drip Cake for my daughter's birthday and
+              she was in tears of joy. The detail was incredible, and it tasted
+              even better than it looked."
+            </p>
+            <div class="testimonial-author">
+              <div class="author-avatar">SB</div>
+              <div>
+                <div class="author-name">Sarah B.</div>
+                <div class="author-location">Manchester, UK</div>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p class="testimonial-text">
+              "Céleste is the only bakery I trust for corporate events. The
+              Butterfly Pea Blossom always impresses our clients. Five stars,
+              every single time."
+            </p>
+            <div class="testimonial-author">
+              <div class="author-avatar">JR</div>
+              <div>
+                <div class="author-name">James R.</div>
+                <div class="author-location">Edinburgh, UK</div>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p class="testimonial-text">
+              "The Blueberry Cream Dream lived up to every expectation. The
+              mirror glaze was flawless and the flavour was divine. I've already
+              placed my next order!"
+            </p>
+            <div class="testimonial-author">
+              <div class="author-avatar">AC</div>
+              <div>
+                <div class="author-name">Amélie C.</div>
+                <div class="author-location">Bristol, UK</div>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p class="testimonial-text">
+              "For our anniversary we wanted something unique. Céleste designed
+              a custom cake that blew us away. Prompt delivery, stunning
+              presentation, incredible taste."
+            </p>
+            <div class="testimonial-author">
+              <div class="author-avatar">PK</div>
+              <div>
+                <div class="author-name">Priya K.</div>
+                <div class="author-location">Cambridge, UK</div>
+              </div>
+            </div>
+          </div>
+          <!-- Duplicate set for seamless loop -->
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p class="testimonial-text">
+              "The Ocean Blue Velvet cake was absolutely breathtaking. Our
+              wedding guests haven't stopped talking about it. Truly a work of
+              art!"
+            </p>
+            <div class="testimonial-author">
+              <div class="author-avatar">EL</div>
+              <div>
+                <div class="author-name">Emma & Luca</div>
+                <div class="author-location">London, UK</div>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p class="testimonial-text">
+              "I ordered the Sapphire Drip Cake for my daughter's birthday and
+              she was in tears of joy. The detail was incredible, and it tasted
+              even better than it looked."
+            </p>
+            <div class="testimonial-author">
+              <div class="author-avatar">SB</div>
+              <div>
+                <div class="author-name">Sarah B.</div>
+                <div class="author-location">Manchester, UK</div>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p class="testimonial-text">
+              "Céleste is the only bakery I trust for corporate events. The
+              Butterfly Pea Blossom always impresses our clients. Five stars,
+              every single time."
+            </p>
+            <div class="testimonial-author">
+              <div class="author-avatar">JR</div>
+              <div>
+                <div class="author-name">James R.</div>
+                <div class="author-location">Edinburgh, UK</div>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p class="testimonial-text">
+              "The Blueberry Cream Dream lived up to every expectation. The
+              mirror glaze was flawless and the flavour was divine. I've already
+              placed my next order!"
+            </p>
+            <div class="testimonial-author">
+              <div class="author-avatar">AC</div>
+              <div>
+                <div class="author-name">Amélie C.</div>
+                <div class="author-location">Bristol, UK</div>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p class="testimonial-text">
+              "For our anniversary we wanted something unique. Céleste designed
+              a custom cake that blew us away. Prompt delivery, stunning
+              presentation, incredible taste."
+            </p>
+            <div class="testimonial-author">
+              <div class="author-avatar">PK</div>
+              <div>
+                <div class="author-name">Priya K.</div>
+                <div class="author-location">Cambridge, UK</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer id="footer">
+      <div class="container">
+        <div class="footer-inner">
+          <div class="footer-brand">
+            <a href="#hero" class="nav-logo">
+              <span class="logo-icon">🎂</span>
+              Céleste Bakery
+            </a>
+            <p class="footer-tagline">
+              Crafting extraordinary cakes rooted in French pastry tradition.
+              Every creation is a celebration of artistry, flavour, and love.
+            </p>
+            <div class="social-links">
+              <a href="#" class="social-link" aria-label="Instagram">📸</a>
+              <a href="#" class="social-link" aria-label="Facebook">👥</a>
+              <a href="#" class="social-link" aria-label="Pinterest">📌</a>
+              <a href="#" class="social-link" aria-label="TikTok">🎵</a>
+            </div>
+          </div>
+          <div class="footer-col">
+            <h4>Our Cakes</h4>
+            <ul class="footer-links">
+              <li><a href="#cakes">Blueberry Cream Dream</a></li>
+              <li><a href="#cakes">Ocean Blue Velvet</a></li>
+              <li><a href="#cakes">Butterfly Pea Blossom</a></li>
+              <li><a href="#cakes">Sapphire Drip Cake</a></li>
+              <li><a href="#order">Custom Designs</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Contact Us</h4>
+            <ul class="footer-links">
+              <li>
+                <a href="mailto:hello@celestebakery.co.uk"
+                  >hello@celestebakery.co.uk</a
+                >
+              </li>
+              <li><a href="tel:+442071234567">+44 (0)207 123 4567</a></li>
+              <li><a href="#">12 Patisserie Lane, London</a></li>
+              <li><a href="#">Mon–Sat: 9am – 6pm</a></li>
+              <li><a href="#order">Order Online</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>© 2025 Céleste Bakery. All rights reserved.</span>
+          <span>Made with 💙 in London</span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="main.js"></script>
+  </body>
+  <script>
+    /* ============================================================
+   Céleste Bakery — main.js
+   Handles: Scroll effects, Recipe Modal, Form Validation,
+            Smooth scroll, Hamburger menu, Scroll reveal
+   ============================================================ */
+
+    "use strict";
+
+    /* ===================== DATA ===================== */
+    const CAKES = [
+      {
+        id: 0,
+        name: "Blueberry Cream Dream",
+        tagline:
+          "A dazzling blue mirror glaze cake bursting with fresh blueberries and light vanilla cream.",
+        image: "images/blueberry_cream_cake.png",
+        imageAlt: "Blueberry Cream Dream cake with blue mirror glaze",
+        ingredients: [
+          "300g plain flour",
+          "250g caster sugar",
+          "3 large eggs",
+          "200ml buttermilk",
+          "120g unsalted butter, softened",
+          "2 tsp vanilla extract",
+          "1½ tsp baking powder",
+          "½ tsp bicarbonate of soda",
+          "150g fresh blueberries",
+          "400ml whipping cream",
+          "3 tbsp icing sugar",
+          "200g white chocolate (for mirror glaze)",
+          "150ml glucose syrup",
+          "Blue gel food colouring",
+          "Edible flowers to decorate",
+        ],
+        steps: [
+          "Preheat oven to 175°C. Grease and line two 8″ cake tins.",
+          "Beat butter and sugar until pale and fluffy, about 4 minutes.",
+          "Add eggs one at a time, beating well after each addition, then mix in vanilla.",
+          "Alternate folding in flour mixture and buttermilk until just combined.",
+          "Fold in blueberries gently, divide between tins and bake 28–32 mins.",
+          "Cool completely on a wire rack before assembling.",
+          "Whip cream with icing sugar to stiff peaks; spread between and around layers.",
+          "Make glaze: heat glucose, cream and chocolate until smooth, tint blue.",
+          "Pour warm glaze over chilled cake and decorate with edible flowers.",
+        ],
+      },
+      {
+        id: 1,
+        name: "Ocean Blue Velvet",
+        tagline:
+          "Our signature navy blue velvet cake with silken cream cheese frosting and gold leaf elegance.",
+        image: "images/blue_velvet_cake.png",
+        imageAlt: "Ocean Blue Velvet cake with navy fondant and gold leaf",
+        ingredients: [
+          "350g plain flour",
+          "300g caster sugar",
+          "120g cocoa powder",
+          "4 large eggs",
+          "240ml buttermilk",
+          "180ml vegetable oil",
+          "2 tsp blue gel food colouring",
+          "1 tsp white wine vinegar",
+          "1½ tsp bicarbonate of soda",
+          "500g cream cheese, softened",
+          "200g butter, softened",
+          "400g icing sugar, sifted",
+          "Silver pearl dragées",
+          "Edible gold leaf sheets",
+          "1 tsp vanilla bean paste",
+        ],
+        steps: [
+          "Preheat oven to 180°C and prepare three 8″ cake tins.",
+          "Whisk flour, cocoa and bicarbonate of soda in a bowl and set aside.",
+          "Beat oil, sugar and eggs until smooth; mix in buttermilk, vinegar and blue colouring.",
+          "Fold wet ingredients into dry until just combined; divide between tins.",
+          "Bake for 25–30 mins until a skewer comes out clean. Cool completely.",
+          "Beat cream cheese and butter together until fluffy; add vanilla and icing sugar gradually.",
+          "Stack layers with cream cheese frosting; coat the outside smoothly.",
+          "Apply a final navy blue fondant coat for a clean finish.",
+          "Decorate with gold leaf, silver pearls and a dusting of edible shimmer.",
+        ],
+      },
+      {
+        id: 2,
+        name: "Butterfly Pea Blossom",
+        tagline:
+          "An enchanting layered sponge naturally tinted with butterfly pea flower tea, adorned with lavender blossoms.",
+        image: "images/butterfly_pea_cake.png",
+        imageAlt: "Butterfly Pea Blossom cake with pale blue swirls",
+        ingredients: [
+          "280g self-raising flour",
+          "250g caster sugar",
+          "4 eggs",
+          "200g unsalted butter, melted",
+          "120ml butterfly pea flower tea (brewed, cooled)",
+          "80ml whole milk",
+          "1 tsp vanilla extract",
+          "1 tsp baking powder",
+          "500ml double cream",
+          "3 tbsp icing sugar",
+          "Blue & purple gel food colouring",
+          "Dried lavender flowers (edible)",
+          "Silver sugar pearls",
+          "Fresh raspberries (for filling)",
+        ],
+        steps: [
+          "Brew butterfly pea flowers in hot water 10 mins; strain and cool completely.",
+          "Preheat oven to 170°C. Grease and line three 7″ tins.",
+          "Cream butter and sugar until very fluffy; beat in eggs and vanilla.",
+          "Fold in flour alternating with the butterfly pea tea and milk.",
+          "Bake 22–26 mins. Cool on racks.",
+          "Whip cream and icing sugar to soft peaks; tint portions in pale blue and lilac.",
+          "Layer cake with cream and fresh raspberries between each tier.",
+          "Swirl the tinted cream on top using a palette knife for a gradient effect.",
+          "Finish with dried lavender blooms and silver sugar pearls.",
+        ],
+      },
+      {
+        id: 3,
+        name: "Sapphire Drip Cake",
+        tagline:
+          "A dramatic royal blue ganache drip cake with white chocolate shards and holographic edible glitter.",
+        image: "images/sapphire_drip_cake.png",
+        imageAlt: "Sapphire Drip Cake with royal blue ganache and glitter",
+        ingredients: [
+          "350g dark chocolate (70%)",
+          "350g caster sugar",
+          "300g plain flour",
+          "3 eggs",
+          "250ml strong brewed coffee",
+          "200ml soured cream",
+          "150ml vegetable oil",
+          "1½ tsp baking powder",
+          "1 tsp bicarbonate of soda",
+          "300g white chocolate (for drip)",
+          "100ml double cream",
+          "Royal blue food colouring gel",
+          "White chocolate shards",
+          "Edible holographic glitter",
+          "1 blue macaron (for topping)",
+        ],
+        steps: [
+          "Preheat oven to 175°C and prepare two deep 8″ tins.",
+          "Stir boiling coffee into cocoa and dark chocolate until melted; cool.",
+          "Whisk eggs, oil, sugar and soured cream together until combined.",
+          "Sift flour, baking powder and bicarbonate of soda; fold into wet mixture with chocolate.",
+          "Bake 35–40 mins. Cool completely before removing from tins.",
+          "Make a stable vanilla Swiss meringue buttercream and coat the cake.",
+          "Heat cream and white chocolate for drip; tint deep royal blue and cool slightly.",
+          "Pour ganache over the top edge allowing it to drip naturally down the sides.",
+          "Decorate with white chocolate shards, a macaron and a generous dusting of holographic glitter.",
+        ],
+      },
+    ];
+
+    /* ===================== NAVBAR SCROLL ===================== */
+    const navbar = document.getElementById("navbar");
+    window.addEventListener(
+      "scroll",
+      () => {
+        navbar.classList.toggle("scrolled", window.scrollY > 50);
+      },
+      { passive: true },
+    );
+
+    /* ===================== HAMBURGER MENU ===================== */
+    const hamburger = document.getElementById("hamburger");
+    const navLinksEl = document.getElementById("nav-links");
+
+    function toggleMenu() {
+      const open = navLinksEl.style.display === "flex";
+      navLinksEl.style.display = open ? "" : "flex";
+      navLinksEl.style.flexDirection = open ? "" : "column";
+      navLinksEl.style.position = open ? "" : "absolute";
+      navLinksEl.style.top = open ? "" : "70px";
+      navLinksEl.style.left = open ? "" : "0";
+      navLinksEl.style.right = open ? "" : "0";
+      navLinksEl.style.background = open ? "" : "rgba(10,14,46,0.97)";
+      navLinksEl.style.backdropFilter = open ? "" : "blur(16px)";
+      navLinksEl.style.padding = open ? "" : "24px";
+      navLinksEl.style.borderBottom = open
+        ? ""
+        : "1px solid rgba(255,255,255,0.1)";
+      navLinksEl.style.gap = open ? "" : "20px";
+    }
+
+    hamburger.addEventListener("click", toggleMenu);
+    hamburger.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") toggleMenu();
+    });
+
+    /* Close mobile menu when a link is clicked */
+    document.querySelectorAll(".nav-links a").forEach((link) => {
+      link.addEventListener("click", () => {
+        if (window.innerWidth <= 600) {
+          navLinksEl.style.display = "";
+        }
+      });
+    });
+
+    /* ===================== SCROLL REVEAL ===================== */
+    const revealEls = document.querySelectorAll(".reveal");
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry, i) => {
+          if (entry.isIntersecting) {
+            // Stagger child elements within the same reveal group
+            entry.target.style.transitionDelay = `${(i % 4) * 0.08}s`;
+            entry.target.classList.add("revealed");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 },
+    );
+
+    revealEls.forEach((el) => observer.observe(el));
+
+    /* ===================== RECIPE MODAL ===================== */
+    const modalOverlay = document.getElementById("recipe-modal");
+    const modalPanel = document.getElementById("modal-panel");
+    const closeBtn = document.getElementById("modal-close-btn");
+
+    function openModal(cakeIndex) {
+      const cake = CAKES[cakeIndex];
+      if (!cake) return;
+
+      document.getElementById("modal-img").src = cake.image;
+      document.getElementById("modal-img").alt = cake.imageAlt;
+      document.getElementById("modal-cake-name").textContent = cake.name;
+      document.getElementById("modal-tagline").textContent = cake.tagline;
+
+      // Ingredients
+      const ingList = document.getElementById("modal-ingredients");
+      ingList.innerHTML = cake.ingredients.map((i) => `<li>${i}</li>`).join("");
+
+      // Steps
+      const stepList = document.getElementById("modal-steps");
+      stepList.innerHTML = cake.steps
+        .map(
+          (s, idx) =>
+            `<li><span class="step-num">${idx + 1}</span><span>${s}</span></li>`,
+        )
+        .join("");
+
+      // Order button pre-selects this cake
+      const orderBtn = document.getElementById("modal-order-btn");
+      orderBtn.onclick = () => {
+        closeModal();
+        const cakeSelect = document.getElementById("field-cake");
+        const cakeValues = [
+          "blueberry_cream",
+          "blue_velvet",
+          "butterfly_pea",
+          "sapphire_drip",
+        ];
+        cakeSelect.value = cakeValues[cakeIndex] || "";
+        document.getElementById("order").scrollIntoView({ behavior: "smooth" });
+      };
+
+      modalOverlay.classList.add("active");
+      document.body.style.overflow = "hidden";
+      setTimeout(() => closeBtn.focus(), 100);
+    }
+
+    function closeModal() {
+      modalOverlay.classList.remove("active");
+      document.body.style.overflow = "";
+    }
+
+    // Open via card click or recipe button
+    document.querySelectorAll(".cake-card").forEach((card) => {
+      const idx = parseInt(card.dataset.cake, 10);
+
+      card.addEventListener("click", (e) => {
+        // Allow recipe button to propagate (it also opens modal)
+        openModal(idx);
+      });
+
+      card.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          openModal(idx);
+        }
+      });
+    });
+
+    closeBtn.addEventListener("click", closeModal);
+
+    modalOverlay.addEventListener("click", (e) => {
+      if (e.target === modalOverlay) closeModal();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeModal();
+    });
+
+    /* ===================== ORDER FORM ===================== */
+    const form = document.getElementById("order-form");
+    const submitBtn = document.getElementById("submit-btn");
+    const successDiv = document.getElementById("form-success");
+
+    // Set minimum date to 3 days from now
+    const dateInput = document.getElementById("field-date");
+    const minDate = new Date();
+    minDate.setDate(minDate.getDate() + 3);
+    dateInput.min = minDate.toISOString().split("T")[0];
+
+    function setError(fieldId, errId, show) {
+      const field = document.getElementById(fieldId);
+      const err = document.getElementById(errId);
+      if (show) {
+        field.classList.add("error");
+        err.classList.add("visible");
+      } else {
+        field.classList.remove("error");
+        err.classList.remove("visible");
+      }
+    }
+
+    function validateEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    function validateForm() {
+      let valid = true;
+
+      const name = document.getElementById("field-name").value.trim();
+      const email = document.getElementById("field-email").value.trim();
+      const date = document.getElementById("field-date").value;
+      const cake = document.getElementById("field-cake").value;
+      const size = document.getElementById("field-size").value;
+
+      // Name
+      const nameOk = name.length >= 2;
+      setError("field-name", "err-name", !nameOk);
+      if (!nameOk) valid = false;
+
+      // Email
+      const emailOk = validateEmail(email);
+      setError("field-email", "err-email", !emailOk);
+      if (!emailOk) valid = false;
+
+      // Date
+      let dateOk = false;
+      if (date) {
+        const chosen = new Date(date);
+        const minD = new Date();
+        minD.setDate(minD.getDate() + 3);
+        dateOk = chosen >= minD;
+      }
+      setError("field-date", "err-date", !dateOk);
+      if (!dateOk) valid = false;
+
+      // Cake type
+      const cakeOk = !!cake;
+      setError("field-cake", "err-cake", !cakeOk);
+      if (!cakeOk) valid = false;
+
+      // Size
+      const sizeOk = !!size;
+      setError("field-size", "err-size", !sizeOk);
+      if (!sizeOk) valid = false;
+
+      return valid;
+    }
+
+    // Live validation on blur
+    [
+      "field-name",
+      "field-email",
+      "field-date",
+      "field-cake",
+      "field-size",
+    ].forEach((id) => {
+      const el = document.getElementById(id);
+      el.addEventListener("change", validateForm);
+      el.addEventListener("blur", validateForm);
+    });
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      if (!validateForm()) return;
+
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = "<span>Sending…</span><span>⏳</span>";
+
+      // Simulate async submission
+      setTimeout(() => {
+        form.style.display = "none";
+        successDiv.classList.add("visible");
+      }, 1400);
+    });
+
+    /* ===================== SMOOTH SCROLL (all anchor links) ===================== */
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener("click", function (e) {
+        const target = document.querySelector(this.getAttribute("href"));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      });
+    });
+
+    /* ===================== HERO STAT COUNTER ===================== */
+    function animateCounter(el, target, suffix = "") {
+      let start = 0;
+      const duration = 1600;
+      const step = 16;
+      const increment = target / (duration / step);
+
+      const timer = setInterval(() => {
+        start += increment;
+        if (start >= target) {
+          el.textContent = target + suffix;
+          clearInterval(timer);
+        } else {
+          el.textContent = Math.floor(start) + suffix;
+        }
+      }, step);
+    }
+
+    // Trigger counter animation when hero stats become visible
+    const statsObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const statNums = document.querySelectorAll(".stat-number");
+            const targets = [500, 98, 12];
+            const suffixes = ["+", "%", "+"];
+            statNums.forEach((el, i) =>
+              animateCounter(el, targets[i], suffixes[i]),
+            );
+            statsObserver.disconnect();
+          }
+        });
+      },
+      { threshold: 0.5 },
+    );
+
+    const statsEl = document.querySelector(".hero-stats");
+    if (statsEl) statsObserver.observe(statsEl);
+  </script>
+</html>
